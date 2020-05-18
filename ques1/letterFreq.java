@@ -11,31 +11,39 @@ Output should be
 d: 1
 e: 2
 f: 1
-(continued for all character in the string)*/
+(continued for all character in the string)
+*/
+
 public class letterFreq {
 
 	public static void main(String args[])
 	   {
-	        int i;
 	        String str;
-	      
-	        int counter[] = new int[256];
+	        int count = 0;
 	        Scanner in = new Scanner(System.in);
-	        
 	        System.out.print("Enter a String : ");
 	        str=in.nextLine();
+	        HashMap<Character, Integer> hmap = new HashMap<Character, Integer>();
 	        
-	         for (i = 0; i < str.length(); i++) {
-	            counter[(int) str.charAt(i)]++;
-	        }
-	        // Print Frequency of characters
-	        for (i = 0; i < 256; i++) {
-	            if (counter[i] != 0) {
-	                  System.out.println("The character " + (char) i  + " has occurred for " + counter[i] + " times");
-	            }
+	        for(int i=0;i<str.length();i++) {
+	        	if(hmap.containsKey(str.charAt(i))) {
+	        		count = hmap.get(str.charAt(i));
+	        		hmap.replace(str.charAt(i),++count);
+	        	}
+	        	else 
+	        		hmap.put(str.charAt(i),1);
 	        }
 	        
+	        for(char ch: hmap.keySet()) {
+	        	
+	        	if(ch==' ') 	
+	        		System.out.println("-:"+hmap.get(ch));
+	        	
+	        	else 
+	        		System.out.println(ch+":"+hmap.get(ch));
+	        } 
 	        in.close();
 	   }
-
 }
+
+//Program By Jayraj Shah
